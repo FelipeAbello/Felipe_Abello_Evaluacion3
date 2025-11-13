@@ -11,14 +11,13 @@ public class PrecioConDescuentoStrategy implements PrecioStrategy {
     private BigDecimal porcentajeDescuento;
     
     public PrecioConDescuentoStrategy() {
-        this.porcentajeDescuento = new BigDecimal("0.10"); // 10% descuento por defecto
+        this.porcentajeDescuento = new BigDecimal("0.10"); // 10% descuento 
     }
     
     @Override
     public BigDecimal calcularPrecio(Mueble mueble, Variante variante) {
         BigDecimal precioBase = mueble.getPrecioBase();
         
-        // Si tiene variante, suma el precio adicional
         if (variante != null && !"Normal".equalsIgnoreCase(variante.getNombreVariante())) {
             precioBase = precioBase.add(variante.getPrecioAdicional());
         }

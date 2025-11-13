@@ -18,7 +18,7 @@ public class PrecioService {
     private PrecioStrategy estrategiaActual;
     
     public PrecioService() {
-        // Por defecto usa la estrategia normal
+        
     }
     
     @Autowired
@@ -27,23 +27,17 @@ public class PrecioService {
         this.estrategiaActual = precioNormalStrategy;
     }
     
-    /**
-     * Cambia la estrategia de cálculo de precio
-     */
+   
     public void setEstrategia(PrecioStrategy estrategia) {
         this.estrategiaActual = estrategia;
     }
     
-    /**
-     * Calcula el precio usando la estrategia actual
-     */
+
     public BigDecimal calcularPrecioFinal(Mueble mueble, Variante variante) {
         return estrategiaActual.calcularPrecio(mueble, variante);
     }
     
-    /**
-     * Calcula el precio con la estrategia normal (sin descuentos)
-     */
+
     public BigDecimal calcularPrecioNormal(Mueble mueble, Variante variante) {
         return precioNormalStrategy.calcularPrecio(mueble, variante);
     }

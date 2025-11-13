@@ -79,16 +79,16 @@ class CotizacionServiceTest {
     @Test
     @DisplayName("Test: Confirmar venta con stock suficiente")
     void testConfirmarVentaConStockSuficiente() {
-        // Given
+        
         when(cotizacionRepository.findById(1L)).thenReturn(Optional.of(cotizacion));
         when(muebleService.verificarStock(1L, 5)).thenReturn(true);
         when(cotizacionFactory.confirmarCotizacion(any(Cotizacion.class))).thenReturn(cotizacion);
         when(cotizacionRepository.save(any(Cotizacion.class))).thenReturn(cotizacion);
         
-        // When
+        
         Cotizacion resultado = cotizacionService.confirmarVenta(1L);
         
-        // Then
+        
         verify(muebleService, times(1)).decrementarStock(1L, 5);
         System.out.println("✓ Venta confirmada exitosamente con stock suficiente");
     }
@@ -96,11 +96,11 @@ class CotizacionServiceTest {
     @Test
     @DisplayName("Test: Error al confirmar venta con stock insuficiente")
     void testConfirmarVentaConStockInsuficiente() {
-        // Given
+        
         when(cotizacionRepository.findById(1L)).thenReturn(Optional.of(cotizacion));
         when(muebleService.verificarStock(1L, 5)).thenReturn(false);
         
-        // When & Then
+        
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             cotizacionService.confirmarVenta(1L);
         });
@@ -113,11 +113,11 @@ class CotizacionServiceTest {
     @Test
     @DisplayName("Test: Error al confirmar cotización ya confirmada")
     void testConfirmarCotizacionYaConfirmada() {
-        // Given
+        
         cotizacion.setConfirmada(true);
         when(cotizacionRepository.findById(1L)).thenReturn(Optional.of(cotizacion));
         
-        // When & Then
+        
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             cotizacionService.confirmarVenta(1L);
         });

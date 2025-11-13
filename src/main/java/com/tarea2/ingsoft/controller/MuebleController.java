@@ -18,10 +18,7 @@ public class MuebleController {
     @Autowired
     private MuebleService muebleService;
     
-    /**
-     * CREATE - Crear un nuevo mueble
-     * POST http://localhost:8080/api/muebles
-     */
+
     @PostMapping
     public ResponseEntity<Mueble> crearMueble(@RequestBody Mueble mueble) {
         try {
@@ -32,10 +29,7 @@ public class MuebleController {
         }
     }
     
-    /**
-     * READ - Listar todos los muebles
-     * GET http://localhost:8080/api/muebles
-     */
+
     @GetMapping
     public ResponseEntity<List<Mueble>> listarTodosMuebles() {
         try {
@@ -49,10 +43,7 @@ public class MuebleController {
         }
     }
     
-    /**
-     * READ - Obtener mueble por ID
-     * GET http://localhost:8080/api/muebles/1
-     */
+
     @GetMapping("/{id}")
     public ResponseEntity<Mueble> obtenerMueblePorId(@PathVariable("id") Long id) {
         Optional<Mueble> mueble = muebleService.obtenerMueblePorId(id);
@@ -64,10 +55,7 @@ public class MuebleController {
         }
     }
     
-    /**
-     * READ - Listar muebles activos
-     * GET http://localhost:8080/api/muebles/activos
-     */
+
     @GetMapping("/activos")
     public ResponseEntity<List<Mueble>> listarMueblesActivos() {
         try {
@@ -78,10 +66,7 @@ public class MuebleController {
         }
     }
     
-    /**
-     * READ - Buscar muebles por tipo
-     * GET http://localhost:8080/api/muebles/tipo/SILLA
-     */
+
     @GetMapping("/tipo/{tipo}")
     public ResponseEntity<List<Mueble>> buscarPorTipo(@PathVariable("tipo") String tipo) {
         try {
@@ -92,10 +77,7 @@ public class MuebleController {
         }
     }
     
-    /**
-     * READ - Buscar muebles por material
-     * GET http://localhost:8080/api/muebles/material/Madera
-     */
+
     @GetMapping("/material/{material}")
     public ResponseEntity<List<Mueble>> buscarPorMaterial(@PathVariable("material") String material) {
         try {
@@ -106,10 +88,7 @@ public class MuebleController {
         }
     }
     
-    /**
-     * READ - Buscar muebles por nombre
-     * GET http://localhost:8080/api/muebles/buscar?nombre=silla
-     */
+
     @GetMapping("/buscar")
     public ResponseEntity<List<Mueble>> buscarPorNombre(@RequestParam("nombre") String nombre) {
         try {
@@ -120,10 +99,7 @@ public class MuebleController {
         }
     }
     
-    /**
-     * UPDATE - Actualizar un mueble
-     * PUT http://localhost:8080/api/muebles/1
-     */
+
     @PutMapping("/{id}")
     public ResponseEntity<Mueble> actualizarMueble(@PathVariable("id") Long id, 
                                                      @RequestBody Mueble mueble) {
@@ -137,10 +113,7 @@ public class MuebleController {
         }
     }
     
-    /**
-     * DELETE - Desactivar un mueble (soft delete)
-     * DELETE http://localhost:8080/api/muebles/1
-     */
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> desactivarMueble(@PathVariable("id") Long id) {
         try {
@@ -153,10 +126,7 @@ public class MuebleController {
         }
     }
     
-    /**
-     * PUT - Activar un mueble
-     * PUT http://localhost:8080/api/muebles/1/activar
-     */
+
     @PutMapping("/{id}/activar")
     public ResponseEntity<Mueble> activarMueble(@PathVariable("id") Long id) {
         try {

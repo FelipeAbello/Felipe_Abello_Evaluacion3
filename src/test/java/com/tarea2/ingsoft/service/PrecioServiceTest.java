@@ -48,10 +48,10 @@ class PrecioServiceTest {
     @Test
     @DisplayName("Test: Calcular precio con variante normal (sin recargo)")
     void testCalcularPrecioConVarianteNormal() {
-        // When
+      
         BigDecimal precioFinal = precioService.calcularPrecioNormal(mueble, varianteNormal);
         
-        // Then
+    
         assertEquals(new BigDecimal("50000.00"), precioFinal);
         System.out.println("✓ Precio con variante normal: " + precioFinal);
     }
@@ -59,10 +59,10 @@ class PrecioServiceTest {
     @Test
     @DisplayName("Test: Calcular precio sin variante (null)")
     void testCalcularPrecioSinVariante() {
-        // When
+       
         BigDecimal precioFinal = precioService.calcularPrecioNormal(mueble, null);
         
-        // Then
+      
         assertEquals(new BigDecimal("50000.00"), precioFinal);
         System.out.println("✓ Precio sin variante: " + precioFinal);
     }
@@ -70,10 +70,10 @@ class PrecioServiceTest {
     @Test
     @DisplayName("Test: Calcular precio con variante premium (con recargo)")
     void testCalcularPrecioConVariantePremium() {
-        // When
+    
         BigDecimal precioFinal = precioService.calcularPrecioNormal(mueble, variantePremium);
         
-        // Then
+       
         BigDecimal precioEsperado = new BigDecimal("65000.00"); // 50000 + 15000
         assertEquals(precioEsperado, precioFinal);
         System.out.println("✓ Precio con variante premium: " + precioFinal);
@@ -82,15 +82,15 @@ class PrecioServiceTest {
     @Test
     @DisplayName("Test: Cambiar estrategia de precio a descuento")
     void testCambiarEstrategiaPrecioConDescuento() {
-        // Given
+    
         PrecioConDescuentoStrategy estrategiaDescuento = new PrecioConDescuentoStrategy();
         estrategiaDescuento.setPorcentajeDescuento(new BigDecimal("0.10")); // 10% descuento
         
-        // When
+       
         precioService.setEstrategia(estrategiaDescuento);
         BigDecimal precioConDescuento = precioService.calcularPrecioFinal(mueble, varianteNormal);
         
-        // Then
+      
         BigDecimal precioEsperado = new BigDecimal("45000.00"); // 50000 - 10%
         assertEquals(0, precioEsperado.compareTo(precioConDescuento), 
                     "El precio con descuento debería ser " + precioEsperado);
@@ -100,15 +100,15 @@ class PrecioServiceTest {
     @Test
     @DisplayName("Test: Precio con variante premium y descuento")
     void testPrecioVariantePremiumConDescuento() {
-        // Given
+     
         PrecioConDescuentoStrategy estrategiaDescuento = new PrecioConDescuentoStrategy();
         estrategiaDescuento.setPorcentajeDescuento(new BigDecimal("0.15")); // 15% descuento
         
-        // When
+     
         precioService.setEstrategia(estrategiaDescuento);
         BigDecimal precioConDescuento = precioService.calcularPrecioFinal(mueble, variantePremium);
         
-        // Then
+       
         // Precio base: 50000 + 15000 = 65000
         // Descuento 15%: 65000 * 0.85 = 55250
         BigDecimal precioEsperado = new BigDecimal("55250.00");

@@ -11,9 +11,7 @@ import java.math.BigDecimal;
 @Component
 public class CotizacionFactory {
     
-    /**
-     * Crea una nueva cotización vacía con estado PENDIENTE
-     */
+
     public Cotizacion crearCotizacionVacia() {
         Cotizacion cotizacion = new Cotizacion();
         cotizacion.setTotal(BigDecimal.ZERO);
@@ -22,9 +20,7 @@ public class CotizacionFactory {
         return cotizacion;
     }
     
-    /**
-     * Crea una cotización con un mueble y su variante
-     */
+
     public Cotizacion crearCotizacionSimple(Mueble mueble, Variante variante, 
                                             Integer cantidad, BigDecimal precioUnitario) {
         Cotizacion cotizacion = crearCotizacionVacia();
@@ -38,9 +34,7 @@ public class CotizacionFactory {
         return cotizacion;
     }
     
-    /**
-     * Crea un detalle de cotización
-     */
+
     public DetalleCotizacion crearDetalleCotizacion(Mueble mueble, Variante variante, 
                                                      Integer cantidad, BigDecimal precioUnitario) {
         DetalleCotizacion detalle = new DetalleCotizacion(mueble, variante, cantidad, precioUnitario);
@@ -48,9 +42,7 @@ public class CotizacionFactory {
         return detalle;
     }
     
-    /**
-     * Convierte una cotización en venta (la confirma)
-     */
+
     public Cotizacion confirmarCotizacion(Cotizacion cotizacion) {
         cotizacion.setConfirmada(true);
         cotizacion.setEstado("CONFIRMADA");

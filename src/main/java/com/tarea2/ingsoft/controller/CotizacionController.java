@@ -19,10 +19,7 @@ public class CotizacionController {
     @Autowired
     private CotizacionService cotizacionService;
     
-    /**
-     * CREATE - Crear una cotización vacía
-     * POST http://localhost:8080/api/cotizaciones
-     */
+
     @PostMapping
     public ResponseEntity<Cotizacion> crearCotizacionVacia() {
         try {
@@ -33,15 +30,7 @@ public class CotizacionController {
         }
     }
     
-    /**
-     * CREATE - Agregar detalle a una cotización
-     * POST http://localhost:8080/api/cotizaciones/1/detalles
-     * Body: {
-     *   "idMueble": 1,
-     *   "idVariante": 2,
-     *   "cantidad": 3
-     * }
-     */
+
     @PostMapping("/{idCotizacion}/detalles")
     public ResponseEntity<?> agregarDetalle(
             @PathVariable("idCotizacion") Long idCotizacion,
@@ -64,10 +53,7 @@ public class CotizacionController {
         }
     }
     
-    /**
-     * PUT - Confirmar una cotización como venta
-     * PUT http://localhost:8080/api/cotizaciones/1/confirmar
-     */
+
     @PutMapping("/{idCotizacion}/confirmar")
     public ResponseEntity<?> confirmarVenta(@PathVariable("idCotizacion") Long idCotizacion) {
         try {
@@ -81,10 +67,7 @@ public class CotizacionController {
         }
     }
     
-    /**
-     * READ - Listar todas las cotizaciones
-     * GET http://localhost:8080/api/cotizaciones
-     */
+
     @GetMapping
     public ResponseEntity<List<Cotizacion>> listarTodasCotizaciones() {
         try {
@@ -98,10 +81,7 @@ public class CotizacionController {
         }
     }
     
-    /**
-     * READ - Obtener cotización por ID
-     * GET http://localhost:8080/api/cotizaciones/1
-     */
+
     @GetMapping("/{id}")
     public ResponseEntity<Cotizacion> obtenerCotizacionPorId(@PathVariable("id") Long id) {
         Optional<Cotizacion> cotizacion = cotizacionService.obtenerCotizacionPorId(id);
@@ -113,10 +93,7 @@ public class CotizacionController {
         }
     }
     
-    /**
-     * READ - Listar cotizaciones pendientes
-     * GET http://localhost:8080/api/cotizaciones/pendientes
-     */
+
     @GetMapping("/pendientes")
     public ResponseEntity<List<Cotizacion>> listarCotizacionesPendientes() {
         try {
@@ -127,10 +104,7 @@ public class CotizacionController {
         }
     }
     
-    /**
-     * READ - Listar ventas confirmadas
-     * GET http://localhost:8080/api/cotizaciones/ventas
-     */
+    
     @GetMapping("/ventas")
     public ResponseEntity<List<Cotizacion>> listarVentas() {
         try {

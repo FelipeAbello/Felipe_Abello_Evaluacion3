@@ -36,17 +36,13 @@ public class CotizacionService {
     @Autowired
     private VarianteService varianteService;
     
-    /**
-     * Crear una cotización vacía usando Factory
-     */
+
     public Cotizacion crearCotizacionVacia() {
         Cotizacion cotizacion = cotizacionFactory.crearCotizacionVacia();
         return cotizacionRepository.save(cotizacion);
     }
     
-    /**
-     * Agregar un detalle a una cotización existente
-     */
+
     @Transactional
     public Cotizacion agregarDetalleCotizacion(Long idCotizacion, Long idMueble, 
                                                 Long idVariante, Integer cantidad) {
@@ -69,7 +65,7 @@ public class CotizacionService {
         }
         Mueble mueble = muebleOpt.get();
         
-        // Obtener la variante (puede ser null para variante "Normal")
+        // Obtener la variante (null para variante "Normal")
         Variante variante = null;
         if (idVariante != null) {
             variante = varianteService.obtenerVariantePorId(idVariante).orElse(null);
@@ -89,9 +85,6 @@ public class CotizacionService {
         return cotizacionRepository.save(cotizacion);
     }
     
-    /**
-     * Confirmar una cotización como venta (descuenta stock)
-     */
     @Transactional
     public Cotizacion confirmarVenta(Long idCotizacion) {
         Optional<Cotizacion> cotizacionOpt = cotizacionRepository.findById(idCotizacion);
@@ -125,30 +118,22 @@ public class CotizacionService {
         return cotizacionRepository.save(cotizacion);
     }
     
-    /**
-     * Listar todas las cotizaciones
-     */
+
     public List<Cotizacion> listarTodasCotizaciones() {
         return cotizacionRepository.findAll();
     }
     
-    /**
-     * Obtener cotización por ID
-     */
+
     public Optional<Cotizacion> obtenerCotizacionPorId(Long id) {
         return cotizacionRepository.findById(id);
     }
     
-    /**
-     * Listar cotizaciones pendientes
-     */
+
     public List<Cotizacion> listarCotizacionesPendientes() {
         return cotizacionRepository.findByEstado("PENDIENTE");
     }
     
-    /**
-     * Listar cotizaciones confirmadas (ventas)
-     */
+
     public List<Cotizacion> listarVentas() {
         return cotizacionRepository.findByConfirmada(true);
     }

@@ -18,10 +18,7 @@ public class VarianteController {
     @Autowired
     private VarianteService varianteService;
     
-    /**
-     * CREATE - Crear una nueva variante
-     * POST http://localhost:8080/api/variantes
-     */
+
     @PostMapping
     public ResponseEntity<Variante> crearVariante(@RequestBody Variante variante) {
         try {
@@ -32,10 +29,7 @@ public class VarianteController {
         }
     }
     
-    /**
-     * READ - Listar todas las variantes
-     * GET http://localhost:8080/api/variantes
-     */
+
     @GetMapping
     public ResponseEntity<List<Variante>> listarTodasVariantes() {
         try {
@@ -49,10 +43,7 @@ public class VarianteController {
         }
     }
     
-    /**
-     * READ - Obtener variante por ID
-     * GET http://localhost:8080/api/variantes/1
-     */
+
     @GetMapping("/{id}")
     public ResponseEntity<Variante> obtenerVariantePorId(@PathVariable("id") Long id) {
         Optional<Variante> variante = varianteService.obtenerVariantePorId(id);
@@ -64,10 +55,7 @@ public class VarianteController {
         }
     }
     
-    /**
-     * READ - Buscar variantes por tipo
-     * GET http://localhost:8080/api/variantes/tipo/ACABADO
-     */
+
     @GetMapping("/tipo/{tipo}")
     public ResponseEntity<List<Variante>> buscarPorTipo(@PathVariable("tipo") String tipo) {
         try {
@@ -77,11 +65,7 @@ public class VarianteController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
-    /**
-     * UPDATE - Actualizar una variante
-     * PUT http://localhost:8080/api/variantes/1
-     */
+
     @PutMapping("/{id}")
     public ResponseEntity<Variante> actualizarVariante(@PathVariable("id") Long id, 
                                                          @RequestBody Variante variante) {
@@ -95,10 +79,7 @@ public class VarianteController {
         }
     }
     
-    /**
-     * DELETE - Eliminar una variante
-     * DELETE http://localhost:8080/api/variantes/1
-     */
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> eliminarVariante(@PathVariable("id") Long id) {
         try {

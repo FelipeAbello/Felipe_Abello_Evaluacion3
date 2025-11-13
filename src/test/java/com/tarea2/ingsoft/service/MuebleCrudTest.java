@@ -46,7 +46,7 @@ class MuebleCrudTest {
     @Test
     @DisplayName("CREATE: Crear un nuevo mueble")
     void testCrearMueble() {
-        // Given
+        
         Mueble nuevoMueble = new Mueble();
         nuevoMueble.setNombreMueble("Mesa Moderna");
         nuevoMueble.setTipo("MESA");
@@ -55,10 +55,10 @@ class MuebleCrudTest {
         
         when(muebleRepository.save(any(Mueble.class))).thenReturn(nuevoMueble);
         
-        // When
+       
         Mueble resultado = muebleService.crearMueble(nuevoMueble);
         
-        // Then
+       
         assertNotNull(resultado);
         assertEquals("ACTIVO", resultado.getEstado());
         assertEquals("Mesa Moderna", resultado.getNombreMueble());
@@ -69,7 +69,7 @@ class MuebleCrudTest {
     @Test
     @DisplayName("READ: Listar todos los muebles")
     void testListarTodosMuebles() {
-        // Given
+       
         Mueble mueble2 = new Mueble();
         mueble2.setIdMueble(2L);
         mueble2.setNombreMueble("Estante Modular");
@@ -77,10 +77,10 @@ class MuebleCrudTest {
         List<Mueble> listaMuebles = Arrays.asList(mueble, mueble2);
         when(muebleRepository.findAll()).thenReturn(listaMuebles);
         
-        // When
+      
         List<Mueble> resultado = muebleService.listarTodosMuebles();
         
-        // Then
+        
         assertNotNull(resultado);
         assertEquals(2, resultado.size());
         verify(muebleRepository, times(1)).findAll();
@@ -90,13 +90,13 @@ class MuebleCrudTest {
     @Test
     @DisplayName("READ: Obtener mueble por ID")
     void testObtenerMueblePorId() {
-        // Given
+     
         when(muebleRepository.findById(1L)).thenReturn(Optional.of(mueble));
         
-        // When
+      
         Optional<Mueble> resultado = muebleService.obtenerMueblePorId(1L);
         
-        // Then
+      
         assertTrue(resultado.isPresent());
         assertEquals("Sillón Ejecutivo", resultado.get().getNombreMueble());
         verify(muebleRepository, times(1)).findById(1L);
@@ -106,13 +106,13 @@ class MuebleCrudTest {
     @Test
     @DisplayName("READ: Mueble no encontrado por ID")
     void testObtenerMuebleNoEncontrado() {
-        // Given
+    
         when(muebleRepository.findById(999L)).thenReturn(Optional.empty());
         
-        // When
+      
         Optional<Mueble> resultado = muebleService.obtenerMueblePorId(999L);
         
-        // Then
+      
         assertFalse(resultado.isPresent());
         System.out.println("✓ Mueble no encontrado (esperado)");
     }
@@ -120,7 +120,7 @@ class MuebleCrudTest {
     @Test
     @DisplayName("UPDATE: Actualizar un mueble existente")
     void testActualizarMueble() {
-        // Given
+      
         Mueble muebleActualizado = new Mueble();
         muebleActualizado.setNombreMueble("Sillón Ejecutivo Premium");
         muebleActualizado.setTipo("SILLON");
@@ -132,10 +132,10 @@ class MuebleCrudTest {
         when(muebleRepository.findById(1L)).thenReturn(Optional.of(mueble));
         when(muebleRepository.save(any(Mueble.class))).thenReturn(mueble);
         
-        // When
+    
         Mueble resultado = muebleService.actualizarMueble(1L, muebleActualizado);
         
-        // Then
+      
         assertNotNull(resultado);
         assertEquals("Sillón Ejecutivo Premium", resultado.getNombreMueble());
         assertEquals(new BigDecimal("300000.00"), resultado.getPrecioBase());
@@ -146,11 +146,11 @@ class MuebleCrudTest {
     @Test
     @DisplayName("UPDATE: Error al actualizar mueble inexistente")
     void testActualizarMuebleInexistente() {
-        // Given
+    
         Mueble muebleActualizado = new Mueble();
         when(muebleRepository.findById(999L)).thenReturn(Optional.empty());
         
-        // When & Then
+      
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             muebleService.actualizarMueble(999L, muebleActualizado);
         });
@@ -162,14 +162,14 @@ class MuebleCrudTest {
     @Test
     @DisplayName("DELETE: Desactivar un mueble (soft delete)")
     void testDesactivarMueble() {
-        // Given
+ 
         when(muebleRepository.findById(1L)).thenReturn(Optional.of(mueble));
         when(muebleRepository.save(any(Mueble.class))).thenReturn(mueble);
         
-        // When
+    
         Mueble resultado = muebleService.desactivarMueble(1L);
         
-        // Then
+       
         assertNotNull(resultado);
         assertEquals("INACTIVO", resultado.getEstado());
         verify(muebleRepository, times(1)).save(any(Mueble.class));
@@ -179,10 +179,10 @@ class MuebleCrudTest {
     @Test
     @DisplayName("DELETE: Error al desactivar mueble inexistente")
     void testDesactivarMuebleInexistente() {
-        // Given
+     
         when(muebleRepository.findById(999L)).thenReturn(Optional.empty());
         
-        // When & Then
+      
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             muebleService.desactivarMueble(999L);
         });
@@ -194,14 +194,14 @@ class MuebleCrudTest {
     @Test
     @DisplayName("READ: Buscar muebles por tipo")
     void testBuscarMueblesPorTipo() {
-        // Given
+     
         List<Mueble> sillones = Arrays.asList(mueble);
         when(muebleRepository.findByTipo("SILLON")).thenReturn(sillones);
         
-        // When
+     
         List<Mueble> resultado = muebleService.buscarPorTipo("SILLON");
         
-        // Then
+    
         assertNotNull(resultado);
         assertEquals(1, resultado.size());
         assertEquals("SILLON", resultado.get(0).getTipo());
@@ -211,14 +211,14 @@ class MuebleCrudTest {
     @Test
     @DisplayName("READ: Listar muebles activos")
     void testListarMueblesActivos() {
-        // Given
+   
         List<Mueble> mueblesActivos = Arrays.asList(mueble);
         when(muebleRepository.findByEstado("ACTIVO")).thenReturn(mueblesActivos);
         
-        // When
+       
         List<Mueble> resultado = muebleService.listarMueblesActivos();
         
-        // Then
+        
         assertNotNull(resultado);
         assertEquals(1, resultado.size());
         assertEquals("ACTIVO", resultado.get(0).getEstado());

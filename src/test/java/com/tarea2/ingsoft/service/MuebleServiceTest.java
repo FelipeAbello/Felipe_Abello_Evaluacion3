@@ -44,13 +44,13 @@ class MuebleServiceTest {
     @Test
     @DisplayName("Test: Verificar stock suficiente")
     void testVerificarStockSuficiente() {
-        // Given
+      
         when(muebleRepository.findById(1L)).thenReturn(Optional.of(mueble));
         
-        // When
+     
         boolean hayStock = muebleService.verificarStock(1L, 5);
         
-        // Then
+       
         assertTrue(hayStock);
         System.out.println("✓ Stock suficiente: Solicitado 5, Disponible 10");
     }
@@ -58,13 +58,13 @@ class MuebleServiceTest {
     @Test
     @DisplayName("Test: Verificar stock insuficiente")
     void testVerificarStockInsuficiente() {
-        // Given
+     
         when(muebleRepository.findById(1L)).thenReturn(Optional.of(mueble));
         
-        // When
+      
         boolean hayStock = muebleService.verificarStock(1L, 15);
         
-        // Then
+       
         assertFalse(hayStock);
         System.out.println("✓ Stock insuficiente: Solicitado 15, Disponible 10");
     }
@@ -72,14 +72,14 @@ class MuebleServiceTest {
     @Test
     @DisplayName("Test: Decrementar stock exitosamente")
     void testDecrementarStockExitoso() {
-        // Given
+      
         when(muebleRepository.findById(1L)).thenReturn(Optional.of(mueble));
         when(muebleRepository.save(any(Mueble.class))).thenReturn(mueble);
         
-        // When
+      
         muebleService.decrementarStock(1L, 3);
         
-        // Then
+       
         assertEquals(7, mueble.getStock());
         verify(muebleRepository, times(1)).save(mueble);
         System.out.println("✓ Stock decrementado: 10 → 7");
@@ -88,10 +88,10 @@ class MuebleServiceTest {
     @Test
     @DisplayName("Test: Error al decrementar stock insuficiente")
     void testDecrementarStockInsuficiente() {
-        // Given
+      
         when(muebleRepository.findById(1L)).thenReturn(Optional.of(mueble));
         
-        // When & Then
+       
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             muebleService.decrementarStock(1L, 15);
         });
@@ -103,10 +103,10 @@ class MuebleServiceTest {
     @Test
     @DisplayName("Test: Error al decrementar stock de mueble inexistente")
     void testDecrementarStockMuebleInexistente() {
-        // Given
+       
         when(muebleRepository.findById(999L)).thenReturn(Optional.empty());
         
-        // When & Then
+       
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             muebleService.decrementarStock(999L, 5);
         });
@@ -118,15 +118,15 @@ class MuebleServiceTest {
     @Test
     @DisplayName("Test: Crear mueble activa automáticamente")
     void testCrearMuebleActivoAutomaticamente() {
-        // Given
+     
         Mueble nuevoMueble = new Mueble();
         nuevoMueble.setNombreMueble("Silla Nueva");
         when(muebleRepository.save(any(Mueble.class))).thenReturn(nuevoMueble);
         
-        // When
+      
         Mueble resultado = muebleService.crearMueble(nuevoMueble);
         
-        // Then
+       
         assertEquals("ACTIVO", resultado.getEstado());
         System.out.println("✓ Mueble creado con estado ACTIVO");
     }
