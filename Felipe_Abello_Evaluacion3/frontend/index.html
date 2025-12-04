@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mueblería los Muebles Hermanos</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .mueble-card { border: 1px solid #ccc; padding: 10px; margin: 10px; border-radius: 8px; }
+        .precio { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Catálogo de Muebles</h1>
+    <div id="catalogo">Cargando muebles...</div>
+
+    <script>
+
+        const API_URL = 'http://localhost:8080';
+
+        async function cargarMuebles() {
+            try {
+                const response = await fetch(`${API_URL}/api/muebles`);
+                if (!response.ok) throw new Error("Error al conectar con el servidor");
+                
+                const muebles = await response.json();
+                const contenedor = document.getElementById('catalogo');
+                contenedor.innerHTML = '';
+
+                muebles.forEach(mueble => {
+                    const div = document.createElement('div');
+                    div.className = 'mueble-card';
+                    div.innerHTML = `
+                        <h3>${mueble.nombre}</h3>
+                        <p>Tipo: ${mueble.tipo}</p>
+                        <p class="precio">$${mueble.precioBase}</p>
+                        <button onclick="alert('Cotizar ${mueble.id}')">Cotizar</button>
+                    `;
+                    contenedor.appendChild(div);
+                });
+            } catch (error) {
+                document.getElementById('catalogo').innerText = "Error: No se pudo cargar el catálogo. Asegúrate que el Backend esté corriendo.";
+                console.error(error);
+            }
+        }
+
+        cargarMuebles();
+    </script>
+</body>
+</html>
