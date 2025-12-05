@@ -38,3 +38,21 @@ Felipe_Abello_Evaluacion3/
 │   └── Dockerfile          # Configuración de imagen Nginx
 ├── docker-compose.yml      # Orquestación de servicios
 └── README.md               # Documentación
+
+Instrucciones de Ejecución y Despliegue
+Requisitos Previos
+Tener Docker Desktop instalado y corriendo.
+
+Pasos para Ejecutar
+Abrir una terminal en la carpeta raíz del proyecto (donde está docker-compose.yml).
+
+Ejecutar el siguiente comando para compilar, construir y levantar los contenedores:
+
+docker-compose up --build
+
+Esperar a que la terminal muestre el mensaje: Started IngsoftApplication in ... seconds.
+
+Acceso a la Aplicación
+Frontend (Cliente & Admin): http://localhost:3000
+
+Backend (API - JSON): http://localhost:8080/api/muebles
