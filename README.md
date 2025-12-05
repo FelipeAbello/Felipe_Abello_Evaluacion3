@@ -25,7 +25,7 @@ El proyecto se orquesta mediante `docker-compose`, levantando 3 servicios interc
 2.  **`backend`**: API RESTful con lógica de negocio (Puerto 8080).
 3.  **`frontend`**: Interfaz de Usuario servida por Nginx (Puerto 3000).
 
-##Instrucciones de Ejecución y Despliegue
+## Instrucciones de Ejecución y Despliegue
 
 Requisitos Previos
 Tener Docker Desktop instalado y corriendo.
@@ -46,7 +46,7 @@ Backend (API - JSON): http://localhost:8080/api/muebles
 
 ---
 
-##Manual de usuario:
+## Manual de usuario:
 
 Modo Cliente (Catálogo y Compras)
 Al ingresar a localhost:3000, verá el catálogo de muebles ACTIVOS.
