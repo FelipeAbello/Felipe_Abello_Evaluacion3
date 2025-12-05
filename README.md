@@ -87,13 +87,14 @@ Reactivación: Posibilidad de volver a "ACTIVAR" muebles previamente desactivado
 ### Estructura de Directorios
 ```text
 Felipe_Abello_Evaluacion3/
-├── backend/                # Código Fuente Java Spring Boot
+├── backend/ # Código Fuente Java Spring Boot
 │   ├── src/
-│   ├── Dockerfile          # Configuración de imagen Java 21
+│   ├── Dockerfile # Configuración de imagen Java 21
 │   └── pom.xml
-├── frontend/               # Código Fuente Interfaz Web
-│   ├── index.html          # Catálogo y Carrito (Cliente)
-│   ├── admin.html          # Panel de Gestión CRUD (Administrador)
-│   └── Dockerfile          # Configuración de imagen Nginx
-├── docker-compose.yml      # Orquestación de servicios
-└── README.md               # Documentación
+├── frontend/ # Código Fuente Interfaz Web
+│   ├── index.html # Catálogo y Carrito (Cliente)
+│   ├── admin.html # Panel de Gestión CRUD (Administrador)
+│   └── Dockerfile # Configuración de imagen Nginx
+├── .env
+├── docker-compose.yml # Orquestación de servicios
+└── README.md # Documentación

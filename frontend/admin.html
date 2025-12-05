@@ -161,7 +161,7 @@
                 renderizarTabla(globalMuebles);
             } catch (error) {
                 console.error("Error cargando inventario", error);
-                document.querySelector('#tablaMuebles tbody').innerHTML = `<tr><td colspan="8" style="text-align:center; color:red;">ERROR DE CONEXIÓN</td></tr>`;
+                document.querySelector('#tablaMuebles tbody').innerHTML = `<tr><td colspan="8" style="text-align:center; color:red;">STOCK VACÍO</td></tr>`;
             }
         }
 
